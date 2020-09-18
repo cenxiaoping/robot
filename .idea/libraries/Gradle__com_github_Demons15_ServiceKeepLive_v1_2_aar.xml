@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.Demons15:ServiceKeepLive:v1.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/98ab86f1bc75e2a67c22941fc01d3d05/ServiceKeepLive-v1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/98ab86f1bc75e2a67c22941fc01d3d05/ServiceKeepLive-v1.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Demons15/ServiceKeepLive/v1.2/44ec9a469d4e11e4e5e64f2f3dbd488cf2b8078e/ServiceKeepLive-v1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

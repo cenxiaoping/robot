@@ -1,0 +1,918 @@
+1.如何activity隐藏状态栏和菜单栏
+如:
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //按需配置,隐藏状态栏和菜单栏
+//        hideSystemBar();
+        mDelegate.onCreate(savedInstanceState);
+    }
+    
+2.异常捕捉后跳转首页登录
+  可以通过配置 @Route(path = RouteConstants.ROUTE_LOGIN_ACTIVITY) 在登录页,达到异常跳转到首页.
+如:
+  @Route(path = RouteConstants.ROUTE_LOGIN_ACTIVITY)
+  public class LoginActivity extends BaseMvvmActivity<ActivityLoginBinding, MainTypeViewModel> {
+
+
+3.登录时候改变主机域名
+ 可以在登录的时候调用  RetrofitManager.release();
+ 如:
+       mBinding.login.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 LogUtil.e("打印:" + "启动" + SplashActivity.class.getCanonicalName());
+                 SpUtil.putString(getApplicationContext(), KeyConstants.SERVER_ADDRESS, mBinding.address.getText().toString().trim());
+                 SpUtil.putString(getApplicationContext(), KeyConstants.PORT_NUMBER, mBinding.port.getText().toString().trim());
+                 RetrofitManager.release();
+                 mViewModel.login();
+             }
+         });
+
+4.项目配置日志打印
+ 4.1.先导入 com.orhanobut:logger:1.15  依赖包
+ 4.2 在 build 文件中配置
+   buildTypes {
+         debug {
+             minifyEnabled false
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+             buildConfigField "boolean", 'IS_DEBUG', 'true'
+         }
+         release {
+             minifyEnabled true
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+             buildConfigField "boolean", 'IS_DEBUG', 'false'
+         }
+     }
+  4.3 在Application 中初始化
+      LogUtil.init(BuildConfig.IS_DEBUG);
+
+5.配置文件更新
+如 :
+    private DownloadManager manager;
+    ..........
+
+    private void initDownload(String url) {
+        UpdateConfiguration configuration = new UpdateConfiguration()
+                //设置下载过程的监听
+                .setOnDownloadListener(this);
+        manager = DownloadManager.getInstance(MainActivity.this)
+                .setApkName(APK_NAME)
+                .setConfiguration(configuration)
+                .setApkUrl(url)
+                .setSmallIcon(R.mipmap.ic_launcher);
+    }
+    //开始下载
+    @Override
+    public void start() {
+
+    }
+     //下载百分比进度
+    @Override
+    public void downloading(int progressPercent) {
+
+    }
+    //下载完成
+    @Override
+    public void done(File apk) {
+
+    }
+    //下载取消
+    @Override
+    public void cancel() {
+
+    }
+    //下载异常
+    @Override
+    public void error(Exception e) {
+
+    }
+
+    在AndroidManifest中配置
+
+      <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}"
+                android:exported="false"
+                android:grantUriPermissions="true"
+                tools:replace="android:authorities">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths_public"
+                    tools:replace="android:resource" />
+      </provider>
+
+      file_paths_public 文件内容如下:
+
+      <?xml version="1.0" encoding="utf-8"?>
+      <paths>
+          <external-path
+              name="app_update_external"
+              path="/" />
+          <external-cache-path
+              name="app_update_cache"
+              path="/" />
+      </paths>
+
+
+ 6.全局拦截401配置
+    在RxAdapter中添加拦截
+   private static class HandleFuc implements Function<Object, Object> {
+          @Override
+          public Object apply(Object o) throws Exception {
+              if (o instanceof RespDTO) {
+                  RespDTO respDTO = (RespDTO) o;
+  //                if (respDTO.code != ExceptionHandler.APP_ERROR.SUCC) {
+  //                    Toast.makeText(RetrofitManager.mContext, respDTO.error, Toast.LENGTH_SHORT).show();
+  //                }
+                  if (respDTO.code == ExceptionHandler.SYSTEM_ERROR.UNAUTHORIZED) {
+                     //跳转登录页或其他操作    EventBus.getDefault().post(new TokenEvent("登录失效"));
+                  }
+              }
+              return o;
+          }
+      }
+    }
+
+  7.针对token异常的处理方式
+
+    在RxAdapter 类中的
+    private static class HandleFuc implements Function<Object, Object> {
+
+          @Override
+          public Object apply(Object o) throws Exception {
+              if (o instanceof RespDTO) {
+                  RespDTO respDTO = (RespDTO) o;
+  //                if (respDTO.code != ExceptionHandler.APP_ERROR.SUCC) {
+  //                    Toast.makeText(RetrofitManager.mContext, respDTO.error, Toast.LENGTH_SHORT).show();
+  //                }
+                  if (respDTO.code == ExceptionHandler.SYSTEM_ERROR.UNAUTHORIZED) {
+                     //跳转登录页或其他操作    EventBus.getDefault().post(new TokenEvent("登录失效"));
+                  }
+              }
+              return o;
+          }
+      }
+8.增加全局浮窗动态配置
+   首先要在Application onCreate 方法中初始化
+     ViewFloat.init(this, BuildConfig.IS_DEBUG);
+    然后在使用的时候,调用以下方法,部分功能可自行配置
+    ViewFloat.with(this)
+                // 设置浮窗xml布局文件，并可设置详细信息
+                .setLayout(R.layout.float_app, new OnInvokeView() {
+                    @Override
+                    public void invoke(View view) {
+                        TextView msg = view.findViewById(R.id.msg);
+                        msg.setText("121312312312kjksdjfksdfsdhfjhdsjfhdsjf");
+                        view.findViewById(R.id.msg_view).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ViewFloat.dismissAppFloat();
+                            }
+                        });
+                    }
+                })
+                // 设置浮窗显示类型，默认只在当前Activity显示，可选一直显示、仅前台显示、仅后台显示
+                .setShowPattern(ShowPattern.ALL_TIME)
+                // 设置吸附方式，共15种模式，详情参考SidePattern
+                .setSidePattern(SidePattern.RESULT_HORIZONTAL)
+                // 设置浮窗的标签，用于区分多个浮窗
+                .setTag("testFloat")
+                // 设置浮窗是否可拖拽，默认可拖拽
+                .setDragEnable(true)
+                // 系统浮窗是否包含EditText，仅针对系统浮窗，默认不包含
+                .hasEditText(false)
+                // 设置浮窗固定坐标，ps：设置固定坐标，Gravity属性和offset属性将无效
+                .setLocation(100, 200)
+                // 设置浮窗的对齐方式和坐标偏移量
+                .setGravity(Gravity.CENTER_VERTICAL, 0, 200)
+                // 设置宽高是否充满父布局，直接在xml设置match_parent属性无效
+                .setMatchParent(false, false)
+                // 设置Activity浮窗的出入动画，可自定义，实现相应接口即可（策略模式），无需动画直接设置为null
+                .setAnimator(new DefaultAnimator())
+                // 设置系统浮窗的出入动画，使用同上
+                .setAppFloatAnimator(new AppFloatDefaultAnimator())
+                // 设置系统浮窗的不需要显示的页面
+                .setFilter(MainActivity.class)
+                // 设置系统浮窗的有效显示高度（不包含虚拟导航栏的高度），基本用不到，除非有虚拟导航栏适配问题
+                .setDisplayHeight(new OnDisplayHeight() {
+                    @Override
+                    public int getDisplayRealHeight(@NotNull Context context) {
+                        return DisplayUtils.INSTANCE.rejectedNavHeight(context);
+                    }
+                })
+                // 创建浮窗（这是关键哦😂）
+                .show();
+
+   9. 基体框架中activity 及加载fragment的主要相关方法介绍
+
+    //加载fragment 到当前视图,默认  addToBackStack 为true, allowAnimation为true,
+    //即默认调用 loadRootFragment(int containerId, @NonNull ISupportFragment toFragment,true,true)
+    loadRootFragment(int containerId, @NonNull ISupportFragment toFragment)
+
+   // 加载fragment 到当前视图,默认  addToBackStack 为true, allowAnimation为true
+    //  其中 addToBackStack 意思是将当前fragment 加入任务栈,true 为加入,false 为不加入 ,allowAnimation 为加载动画是否显示,true 为显示,false 为不显示
+    loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack, boolean allowAnimation)
+
+    //对返回键的监听
+    onBackPressedSupport()
+
+    //获取栈顶的fragment
+    getTopFragment()
+
+    //在当前栈内查找fragment 是否存在
+    findFragment(Class<T> fragmentClass)
+
+  10.图表类引用  lib_chart
+
+  可参考 MainNewsFragment中代码,部分方法解释如下
+    //设置图表的背景颜色
+     chart.setBackgroundColor(Color.WHITE);
+     // 是否显示表格颜色
+      chart.setDrawGridBackground(false);
+      //设置图表离底部的间距
+      chart.setExtraBottomOffset(20);
+      //设置图表离底部的间距
+      chart.setExtraLeftOffset(20);
+       //设置图表离底部的间距
+      chart.setExtraRightOffset(20);
+      //设置图表背景是否阴影
+      chart.setDrawBarShadow(false);
+      chart.setHighlightFullBarEnabled(false);
+      // 设置是否可以触摸
+      chart.setTouchEnabled(true);
+      // 设置是否可以用手指移动图表
+      chart.setDragEnabled(true);
+      //设置是否能扩大扩小
+      chart.setPinchZoom(false);
+      //设置是否显示图表边框
+      chart.setDrawBorders(false);
+      //如果设置为true，那么所有的值都会显示在bar的上方，而不是在顶部。
+      chart.setDrawValueAboveBar(false);
+      // 设置是否可以缩放图表
+      chart.setScaleEnabled(false);
+      Matrix matrix = new Matrix();
+      //设置图表 x,y轴放大倍数,当前属性为x轴放大1.4倍,y轴不变
+      matrix.postScale(1.4f, 1.0f);
+      chart.getViewPortHandler().refresh(matrix, chart, false); // 设置缩放
+      // 设置是否显示描述数据,true 为显示,false 为不显示
+      chart.getDescriptionLeft().setEnabled(true);
+      chart.getDescriptionLeft().setTextColor(chart.getResources().getColor(R.color.color_ffab01));
+       // 设置图表左边描述
+      chart.getDescriptionLeft().setText("bpm");
+       // 设置图表左边描述字体大小
+       chart.getDescriptionLeft().setTextSize(14);
+      // 设置描述显示的位置，默认是显示在图表的右下角的
+      chart.getDescriptionLeft().setPosition(120, 30);
+      //是否显示右侧y轴
+      chart.getAxisRight().setEnabled(false);
+     // 如果没有数据的时候，会显示这个，类似ListView的EmptyView
+      NotShowNoDataText(chart);
+      // 表格的的颜色，在这里是是给颜色设置一个透明度
+      chart.setGridBackgroundColor(Color.WHITE);
+      //图例相关设置
+      Legend mLegend = chart.getLegend();
+       //是否显示图例
+      mLegend.setEnabled(true);
+      //图例样式：有圆点，正方形，短线 几种样式
+      mLegend.setForm(Legend.LegendForm.SQUARE);
+      // 图例显示的位置：如下2行代码设置图例显示在左下角
+      mLegend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+      mLegend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+      // 图例的排列方式：水平排列和竖直排列2种
+      mLegend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+      // 图例距离x轴的距离
+      mLegend.setXEntrySpace(30f);
+      //图例距离y轴的距离
+      mLegend.setYEntrySpace(10f);
+      //图例的大小
+      mLegend.setFormSize(7f);
+      // 图例描述文字大小颜色
+      mLegend.setTextSize(10);
+      mLegend.setTextColor(chart.getResources().getColor(R.color.color_444444));
+      //X轴设定
+      XAxis xAxis = chart.getXAxis();
+      //这里设置x轴是否以日期格式显示或者原数据显示 ,详情可以看源码注释
+      xAxis.yShowType = xAxis.DATE;
+      ///设置轴启用或禁用 如果禁用以下的设置全部不生效
+      xAxis.setEnabled(true);
+      // 是否显示x轴线
+      xAxis.setDrawAxisLine(true);
+      //绘制标签  指x轴上的对应数值
+      xAxis.setDrawLabels(true);
+      // 设置x轴线的颜色
+      xAxis.setAxisLineColor(chart.getResources().getColor(R.color.color_999999));
+      //是否绘制x方向网格线 设置x轴上每个点对应的线
+      xAxis.setDrawGridLines(false);
+      //x方向网格线的颜色
+      xAxis.setGridColor(chart.getResources().getColor(R.color.color_30FFFFFF));
+      //设置竖线大小
+      xAxis.setGridLineWidth(10f);
+      // 设置x轴的显示位置
+      xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+      // 设置x轴文字的大小
+      xAxis.setTextSize(12);
+      // 设置x轴数据偏移量(labels距离xx轴的偏移量)
+      xAxis.setYOffset(5f);
+      xAxis.setXOffset(200f);
+      // 显示x轴标签
+      ValueFormatter formatter = new ValueFormatter() {
+          @Override
+          public String getFormattedValue(float value) {
+              int index = (int) value;
+              if (index < 0 || index >= labels.size()) {
+                  return "";
+              }
+              return labels.get(index);
+              //return labels.get(Math.min(Math.max((int) value, 0), labels.size() - 1));
+          }
+      };
+      // 引用标签
+      xAxis.setValueFormatter(formatter);
+      // 设置x轴文字颜色
+      xAxis.setTextColor(chart.getResources().getColor(R.color.color_444444));
+      float axisMinimum = -0.5f;
+      float axisMaximum = 8.5f;
+      // 为此轴设置自定义最小值。如果设置，则不计算此值,自动取决于
+         提供的数据。使用resetAxisMin Value（）来撤消这个.
+         如果设置StartAtZero（false）
+         这个方法。否则，轴-最小值仍将被强制为0。
+      xAxis.setAxisMinimum(axisMinimum);//设置离左边位置0.5个柱状图的宽度
+     // 设置总的宽度，当前左右各空1.5个柱状图的宽度 ,这样两边各空出来1.5个柱状图的距离。
+      xAxis.setAxisMaximum(axisMaximum);
+      // 设置x轴每最小刻度
+      xAxis.setGranularity(1f);
+      //设置标签居中
+      xAxis.setCenterAxisLabels(false);
+      //图表将避免第一个和最后一个标签条目被减掉在图表或屏幕的边缘
+      xAxis.setAvoidFirstLastClipping(false);
+      // 设置y轴label 数量
+      xAxis.setLabelCount(labels.size(), false);
+
+      //y轴先关设置
+      YAxis yAxis = chart.getAxisLeft();
+      //设置y轴labels 的数值保留一位小数点显示,另外一种就是显示整型数据
+      yAxis.chatType = yAxis.DOUBLE;
+      //设置x轴的最大值
+      yAxis.setAxisMaximum(150.0f + 7.5f);
+      // 设置y轴的最大值
+      yAxis.setAxisMinimum(0.0f);
+      // 设置y轴的最小刻度
+      yAxis.setGranularity(15);
+      // 设置y轴label 数量
+      yAxis.setLabelCount(11, false);
+      // 显示y轴
+      yAxis.setDrawAxisLine(true);
+      // 设置y轴数据的位置
+      yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+      // 不从y轴发出横向直线
+      yAxis.setDrawGridLines(false);
+      // 是否显示y轴坐标线
+      yAxis.setDrawZeroLine(true);
+      // 设置y轴线的颜色
+      yAxis.setAxisLineColor(chart.getResources().getColor(R.color.color_999999));
+      // 设置y轴的文字颜色
+      yAxis.setTextColor(chart.getResources().getColor(R.color.color_ffab01));
+      // 设置y轴文字的大小
+      yAxis.setTextSize(12);
+      // 设置y轴数据偏移量 (labels距离xx轴的偏移量)
+      //设置y轴labels横向移动边距,负数往左移,正数往右移
+      yAxis.setXOffset(10);
+
+      BarDataSet   set1 = new BarDataSet(entries, title);
+      set1.setColor(barColor);
+      ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+      dataSets.add(set1);
+      BarData data = new BarData(dataSets);
+      // 设置value值 颜色
+      data.setValueTextColor(chart.getResources().getColor(R.color.color_c4c3ce));
+      //设置y轴显示的标签
+      data.setValueFormatter(new ValueFormatter() {
+          @Override
+          public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+              return ((int) (value * 100)) + "%";
+          }
+      });
+      //是否显示柱状图顶部值
+      set1.setDrawValues(false);
+      // 设置bar的宽度
+      data.setBarWidth(0.35f);
+      //设置数据
+      chart.setData(data);
+
+      LineDataSet dataSet = new LineDataSet(entries, label);
+      // 设置曲线的颜色
+      dataSet.setColor(lineColor);
+      // 设置线的宽度
+      dataSet.setLineWidth(2f);
+      //设置圆点的颜色
+      dataSet.setCircleColor(Color.WHITE);
+      // 设置外圆点半径
+      dataSet.setCircleRadius(5f);
+      //设置内圆的颜色
+      dataSet.setCircleHoleColor(lineColor);
+      //设置内圆半径
+      dataSet.setCircleHoleRadius(3f);
+      // 设置图标模式为贝塞尔曲线,有其他模式可以根据需要自行选择
+      dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+      //设置指定此数据集应该针对哪个轴绘制(左边或者右边)
+      dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+      // 是否绘制数据值
+      dataSet.setDrawValues(false);
+
+
+  11.FloatingActionMenu 控件使用方式
+  首先在布局中加入，如：
+  activity_main_view.xml
+
+  //设置按钮外能关闭
+  mBinding.menuRed.setClosedOnTouchOutside(true);
+
+  具体参照 Module_main 中的MainActivity 中使用。
+
+1.如何activity隐藏状态栏和菜单栏
+如:
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //按需配置,隐藏状态栏和菜单栏
+//        hideSystemBar();
+        mDelegate.onCreate(savedInstanceState);
+    }
+
+2.异常捕捉后跳转首页登录
+  可以通过配置 @Route(path = RouteConstants.ROUTE_LOGIN_ACTIVITY) 在登录页,达到异常跳转到首页.
+如:
+  @Route(path = RouteConstants.ROUTE_LOGIN_ACTIVITY)
+  public class LoginActivity extends BaseMvvmActivity<ActivityLoginBinding, MainTypeViewModel> {
+
+
+3.登录时候改变主机域名
+ 可以在登录的时候调用  RetrofitManager.release();
+ 如:
+       mBinding.login.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 LogUtil.e("打印:" + "启动" + SplashActivity.class.getCanonicalName());
+                 SpUtil.putString(getApplicationContext(), KeyConstants.SERVER_ADDRESS, mBinding.address.getText().toString().trim());
+                 SpUtil.putString(getApplicationContext(), KeyConstants.PORT_NUMBER, mBinding.port.getText().toString().trim());
+                 RetrofitManager.release();
+                 mViewModel.login();
+             }
+         });
+
+4.项目配置日志打印
+ 4.1.先导入 com.orhanobut:logger:1.15  依赖包
+ 4.2 在 build 文件中配置
+   buildTypes {
+         debug {
+             minifyEnabled false
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+             buildConfigField "boolean", 'IS_DEBUG', 'true'
+         }
+         release {
+             minifyEnabled true
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+             buildConfigField "boolean", 'IS_DEBUG', 'false'
+         }
+     }
+  4.3 在Application 中初始化
+      LogUtil.init(BuildConfig.IS_DEBUG);
+
+5.配置文件更新
+如 :
+    private DownloadManager manager;
+    ..........
+
+    private void initDownload(String url) {
+        UpdateConfiguration configuration = new UpdateConfiguration()
+                //设置下载过程的监听
+                .setOnDownloadListener(this);
+        manager = DownloadManager.getInstance(MainActivity.this)
+                .setApkName(APK_NAME)
+                .setConfiguration(configuration)
+                .setApkUrl(url)
+                .setSmallIcon(R.mipmap.ic_launcher);
+    }
+    //开始下载
+    @Override
+    public void start() {
+
+    }
+     //下载百分比进度
+    @Override
+    public void downloading(int progressPercent) {
+
+    }
+    //下载完成
+    @Override
+    public void done(File apk) {
+
+    }
+    //下载取消
+    @Override
+    public void cancel() {
+
+    }
+    //下载异常
+    @Override
+    public void error(Exception e) {
+
+    }
+
+    在AndroidManifest中配置
+
+      <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}"
+                android:exported="false"
+                android:grantUriPermissions="true"
+                tools:replace="android:authorities">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths_public"
+                    tools:replace="android:resource" />
+      </provider>
+
+      file_paths_public 文件内容如下:
+
+      <?xml version="1.0" encoding="utf-8"?>
+      <paths>
+          <external-path
+              name="app_update_external"
+              path="/" />
+          <external-cache-path
+              name="app_update_cache"
+              path="/" />
+      </paths>
+
+
+ 6.全局拦截401配置
+    在RxAdapter中添加拦截
+   private static class HandleFuc implements Function<Object, Object> {
+          @Override
+          public Object apply(Object o) throws Exception {
+              if (o instanceof RespDTO) {
+                  RespDTO respDTO = (RespDTO) o;
+  //                if (respDTO.code != ExceptionHandler.APP_ERROR.SUCC) {
+  //                    Toast.makeText(RetrofitManager.mContext, respDTO.error, Toast.LENGTH_SHORT).show();
+  //                }
+                  if (respDTO.code == ExceptionHandler.SYSTEM_ERROR.UNAUTHORIZED) {
+                     //跳转登录页或其他操作    EventBus.getDefault().post(new TokenEvent("登录失效"));
+                  }
+              }
+              return o;
+          }
+      }
+    }
+
+  7.针对token异常的处理方式
+
+    在RxAdapter 类中的
+    private static class HandleFuc implements Function<Object, Object> {
+
+          @Override
+          public Object apply(Object o) throws Exception {
+              if (o instanceof RespDTO) {
+                  RespDTO respDTO = (RespDTO) o;
+  //                if (respDTO.code != ExceptionHandler.APP_ERROR.SUCC) {
+  //                    Toast.makeText(RetrofitManager.mContext, respDTO.error, Toast.LENGTH_SHORT).show();
+  //                }
+                  if (respDTO.code == ExceptionHandler.SYSTEM_ERROR.UNAUTHORIZED) {
+                     //跳转登录页或其他操作    EventBus.getDefault().post(new TokenEvent("登录失效"));
+                  }
+              }
+              return o;
+          }
+      }
+8.增加全局浮窗动态配置
+   首先要在Application onCreate 方法中初始化
+     ViewFloat.init(this, BuildConfig.IS_DEBUG);
+    然后在使用的时候,调用以下方法,部分功能可自行配置
+    ViewFloat.with(this)
+                // 设置浮窗xml布局文件，并可设置详细信息
+                .setLayout(R.layout.float_app, new OnInvokeView() {
+                    @Override
+                    public void invoke(View view) {
+                        TextView msg = view.findViewById(R.id.msg);
+                        msg.setText("121312312312kjksdjfksdfsdhfjhdsjfhdsjf");
+                        view.findViewById(R.id.msg_view).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ViewFloat.dismissAppFloat();
+                            }
+                        });
+                    }
+                })
+                // 设置浮窗显示类型，默认只在当前Activity显示，可选一直显示、仅前台显示、仅后台显示
+                .setShowPattern(ShowPattern.ALL_TIME)
+                // 设置吸附方式，共15种模式，详情参考SidePattern
+                .setSidePattern(SidePattern.RESULT_HORIZONTAL)
+                // 设置浮窗的标签，用于区分多个浮窗
+                .setTag("testFloat")
+                // 设置浮窗是否可拖拽，默认可拖拽
+                .setDragEnable(true)
+                // 系统浮窗是否包含EditText，仅针对系统浮窗，默认不包含
+                .hasEditText(false)
+                // 设置浮窗固定坐标，ps：设置固定坐标，Gravity属性和offset属性将无效
+                .setLocation(100, 200)
+                // 设置浮窗的对齐方式和坐标偏移量
+                .setGravity(Gravity.CENTER_VERTICAL, 0, 200)
+                // 设置宽高是否充满父布局，直接在xml设置match_parent属性无效
+                .setMatchParent(false, false)
+                // 设置Activity浮窗的出入动画，可自定义，实现相应接口即可（策略模式），无需动画直接设置为null
+                .setAnimator(new DefaultAnimator())
+                // 设置系统浮窗的出入动画，使用同上
+                .setAppFloatAnimator(new AppFloatDefaultAnimator())
+                // 设置系统浮窗的不需要显示的页面
+                .setFilter(MainActivity.class)
+                // 设置系统浮窗的有效显示高度（不包含虚拟导航栏的高度），基本用不到，除非有虚拟导航栏适配问题
+                .setDisplayHeight(new OnDisplayHeight() {
+                    @Override
+                    public int getDisplayRealHeight(@NotNull Context context) {
+                        return DisplayUtils.INSTANCE.rejectedNavHeight(context);
+                    }
+                })
+                // 创建浮窗（这是关键哦😂）
+                .show();
+
+   9. 基体框架中activity 及加载fragment的主要相关方法介绍
+
+    //加载fragment 到当前视图,默认  addToBackStack 为true, allowAnimation为true,
+    //即默认调用 loadRootFragment(int containerId, @NonNull ISupportFragment toFragment,true,true)
+    loadRootFragment(int containerId, @NonNull ISupportFragment toFragment)
+
+   // 加载fragment 到当前视图,默认  addToBackStack 为true, allowAnimation为true
+    //  其中 addToBackStack 意思是将当前fragment 加入任务栈,true 为加入,false 为不加入 ,allowAnimation 为加载动画是否显示,true 为显示,false 为不显示
+    loadRootFragment(int containerId, ISupportFragment toFragment, boolean addToBackStack, boolean allowAnimation)
+
+    //对返回键的监听
+    onBackPressedSupport()
+
+    //获取栈顶的fragment
+    getTopFragment()
+
+    //在当前栈内查找fragment 是否存在
+    findFragment(Class<T> fragmentClass)
+
+  10.图表类引用  lib_chart
+
+  可参考 MainNewsFragment中代码,部分方法解释如下
+    //设置图表的背景颜色
+     chart.setBackgroundColor(Color.WHITE);
+     // 是否显示表格颜色
+      chart.setDrawGridBackground(false);
+      //设置图表离底部的间距
+      chart.setExtraBottomOffset(20);
+      //设置图表离底部的间距
+      chart.setExtraLeftOffset(20);
+       //设置图表离底部的间距
+      chart.setExtraRightOffset(20);
+      //设置图表背景是否阴影
+      chart.setDrawBarShadow(false);
+      chart.setHighlightFullBarEnabled(false);
+      // 设置是否可以触摸
+      chart.setTouchEnabled(true);
+      // 设置是否可以用手指移动图表
+      chart.setDragEnabled(true);
+      //设置是否能扩大扩小
+      chart.setPinchZoom(false);
+      //设置是否显示图表边框
+      chart.setDrawBorders(false);
+      //如果设置为true，那么所有的值都会显示在bar的上方，而不是在顶部。
+      chart.setDrawValueAboveBar(false);
+      // 设置是否可以缩放图表
+      chart.setScaleEnabled(false);
+      Matrix matrix = new Matrix();
+      //设置图表 x,y轴放大倍数,当前属性为x轴放大1.4倍,y轴不变
+      matrix.postScale(1.4f, 1.0f);
+      chart.getViewPortHandler().refresh(matrix, chart, false); // 设置缩放
+      // 设置是否显示描述数据,true 为显示,false 为不显示
+      chart.getDescriptionLeft().setEnabled(true);
+      chart.getDescriptionLeft().setTextColor(chart.getResources().getColor(R.color.color_ffab01));
+       // 设置图表左边描述
+      chart.getDescriptionLeft().setText("bpm");
+       // 设置图表左边描述字体大小
+       chart.getDescriptionLeft().setTextSize(14);
+      // 设置描述显示的位置，默认是显示在图表的右下角的
+      chart.getDescriptionLeft().setPosition(120, 30);
+      //是否显示右侧y轴
+      chart.getAxisRight().setEnabled(false);
+     // 如果没有数据的时候，会显示这个，类似ListView的EmptyView
+      NotShowNoDataText(chart);
+      // 表格的的颜色，在这里是是给颜色设置一个透明度
+      chart.setGridBackgroundColor(Color.WHITE);
+      //图例相关设置
+      Legend mLegend = chart.getLegend();
+       //是否显示图例
+      mLegend.setEnabled(true);
+      //图例样式：有圆点，正方形，短线 几种样式
+      mLegend.setForm(Legend.LegendForm.SQUARE);
+      // 图例显示的位置：如下2行代码设置图例显示在左下角
+      mLegend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+      mLegend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+      // 图例的排列方式：水平排列和竖直排列2种
+      mLegend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+      // 图例距离x轴的距离
+      mLegend.setXEntrySpace(30f);
+      //图例距离y轴的距离
+      mLegend.setYEntrySpace(10f);
+      //图例的大小
+      mLegend.setFormSize(7f);
+      // 图例描述文字大小颜色
+      mLegend.setTextSize(10);
+      mLegend.setTextColor(chart.getResources().getColor(R.color.color_444444));
+      //X轴设定
+      XAxis xAxis = chart.getXAxis();
+      //这里设置x轴是否以日期格式显示或者原数据显示 ,详情可以看源码注释
+      xAxis.yShowType = xAxis.DATE;
+      ///设置轴启用或禁用 如果禁用以下的设置全部不生效
+      xAxis.setEnabled(true);
+      // 是否显示x轴线
+      xAxis.setDrawAxisLine(true);
+      //绘制标签  指x轴上的对应数值
+      xAxis.setDrawLabels(true);
+      // 设置x轴线的颜色
+      xAxis.setAxisLineColor(chart.getResources().getColor(R.color.color_999999));
+      //是否绘制x方向网格线 设置x轴上每个点对应的线
+      xAxis.setDrawGridLines(false);
+      //x方向网格线的颜色
+      xAxis.setGridColor(chart.getResources().getColor(R.color.color_30FFFFFF));
+      //设置竖线大小
+      xAxis.setGridLineWidth(10f);
+      // 设置x轴的显示位置
+      xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+      // 设置x轴文字的大小
+      xAxis.setTextSize(12);
+      // 设置x轴数据偏移量(labels距离xx轴的偏移量)
+      xAxis.setYOffset(5f);
+      xAxis.setXOffset(200f);
+      // 显示x轴标签
+      ValueFormatter formatter = new ValueFormatter() {
+          @Override
+          public String getFormattedValue(float value) {
+              int index = (int) value;
+              if (index < 0 || index >= labels.size()) {
+                  return "";
+              }
+              return labels.get(index);
+              //return labels.get(Math.min(Math.max((int) value, 0), labels.size() - 1));
+          }
+      };
+      // 引用标签
+      xAxis.setValueFormatter(formatter);
+      // 设置x轴文字颜色
+      xAxis.setTextColor(chart.getResources().getColor(R.color.color_444444));
+      float axisMinimum = -0.5f;
+      float axisMaximum = 8.5f;
+      // 为此轴设置自定义最小值。如果设置，则不计算此值,自动取决于
+         提供的数据。使用resetAxisMin Value（）来撤消这个.
+         如果设置StartAtZero（false）
+         这个方法。否则，轴-最小值仍将被强制为0。
+      xAxis.setAxisMinimum(axisMinimum);//设置离左边位置0.5个柱状图的宽度
+     // 设置总的宽度，当前左右各空1.5个柱状图的宽度 ,这样两边各空出来1.5个柱状图的距离。
+      xAxis.setAxisMaximum(axisMaximum);
+      // 设置x轴每最小刻度
+      xAxis.setGranularity(1f);
+      //设置标签居中
+      xAxis.setCenterAxisLabels(false);
+      //图表将避免第一个和最后一个标签条目被减掉在图表或屏幕的边缘
+      xAxis.setAvoidFirstLastClipping(false);
+      // 设置y轴label 数量
+      xAxis.setLabelCount(labels.size(), false);
+
+      //y轴先关设置
+      YAxis yAxis = chart.getAxisLeft();
+      //设置y轴labels 的数值保留一位小数点显示,另外一种就是显示整型数据
+      yAxis.chatType = yAxis.DOUBLE;
+      //设置x轴的最大值
+      yAxis.setAxisMaximum(150.0f + 7.5f);
+      // 设置y轴的最大值
+      yAxis.setAxisMinimum(0.0f);
+      // 设置y轴的最小刻度
+      yAxis.setGranularity(15);
+      // 设置y轴label 数量
+      yAxis.setLabelCount(11, false);
+      // 显示y轴
+      yAxis.setDrawAxisLine(true);
+      // 设置y轴数据的位置
+      yAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+      // 不从y轴发出横向直线
+      yAxis.setDrawGridLines(false);
+      // 是否显示y轴坐标线
+      yAxis.setDrawZeroLine(true);
+      // 设置y轴线的颜色
+      yAxis.setAxisLineColor(chart.getResources().getColor(R.color.color_999999));
+      // 设置y轴的文字颜色
+      yAxis.setTextColor(chart.getResources().getColor(R.color.color_ffab01));
+      // 设置y轴文字的大小
+      yAxis.setTextSize(12);
+      // 设置y轴数据偏移量 (labels距离xx轴的偏移量)
+      //设置y轴labels横向移动边距,负数往左移,正数往右移
+      yAxis.setXOffset(10);
+
+      BarDataSet   set1 = new BarDataSet(entries, title);
+      set1.setColor(barColor);
+      ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+      dataSets.add(set1);
+      BarData data = new BarData(dataSets);
+      // 设置value值 颜色
+      data.setValueTextColor(chart.getResources().getColor(R.color.color_c4c3ce));
+      //设置y轴显示的标签
+      data.setValueFormatter(new ValueFormatter() {
+          @Override
+          public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+              return ((int) (value * 100)) + "%";
+          }
+      });
+      //是否显示柱状图顶部值
+      set1.setDrawValues(false);
+      // 设置bar的宽度
+      data.setBarWidth(0.35f);
+      //设置数据
+      chart.setData(data);
+
+      LineDataSet dataSet = new LineDataSet(entries, label);
+      // 设置曲线的颜色
+      dataSet.setColor(lineColor);
+      // 设置线的宽度
+      dataSet.setLineWidth(2f);
+      //设置圆点的颜色
+      dataSet.setCircleColor(Color.WHITE);
+      // 设置外圆点半径
+      dataSet.setCircleRadius(5f);
+      //设置内圆的颜色
+      dataSet.setCircleHoleColor(lineColor);
+      //设置内圆半径
+      dataSet.setCircleHoleRadius(3f);
+      // 设置图标模式为贝塞尔曲线,有其他模式可以根据需要自行选择
+      dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+      //设置指定此数据集应该针对哪个轴绘制(左边或者右边)
+      dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+      // 是否绘制数据值
+      dataSet.setDrawValues(false);
+
+
+  11.FloatingActionMenu 控件使用方式
+  首先在布局中加入，如：
+  activity_main_view.xml
+
+  //设置按钮外能关闭
+  mBinding.menuRed.setClosedOnTouchOutside(true);
+
+  具体参照 Module_main 中的MainActivity 中使用。
+
+  12.通过rxjava 添加定时轮询任务
+
+ public Disposable sDisposable;
+ private void createTask() {
+        sDisposable = Observable
+                .interval(3, TimeUnit.SECONDS)
+                //取消任务时取消定时唤醒
+                .doOnDispose(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        LogPrintUtil.e(TAG, "取消任务！");
+                    }
+                })
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long count) throws Exception {
+                       //执行相关任务
+                    }
+                });
+    }
+
+    public void cancelTask() {
+        //取消对任务的订阅
+        if (null != sDisposable) {
+            sDisposable.dispose();
+            sDisposable = null;
+        }
+        LogPrintUtil.e("结束任务！");
+    }
+13 状态栏沉浸式，改变图标颜色等
+    //设置共同沉浸式样式
+    StatusBar.with(this).navigationBarColor(R.color.colorPrimary).init();
+    //设置状态栏图标样式字体颜色为黑色
+    StatusBar.with(this).statusBarDarkFont(true).init();
+    //设置状态栏图标样式字体颜色为白色
+    StatusBar.with(this).statusBarDarkFont(false).init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

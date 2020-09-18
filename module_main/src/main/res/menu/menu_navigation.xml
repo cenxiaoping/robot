@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_xiaobo_help"
+        android:icon="@mipmap/icon_xbbn"
+        android:title="小博帮您" />
+    <item
+        android:id="@+id/fragment_role_choices"
+        android:icon="@mipmap/icon_zhdz"
+        android:title="智慧导诊" />
+    <item
+        android:id="@+id/fragment_hospital_introduce"
+        android:icon="@mipmap/icon_yyjs"
+        android:title="医院介绍" />
+    <item
+        android:id="@+id/fragment_info_disclosure"
+        android:icon="@mipmap/icon_yndh"
+        android:title="院内导航" />
+    <item
+        android:id="@+id/fragment_hospital_navigation"
+        android:icon="@mipmap/icon_xxgs"
+        android:title="信息公示" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_shiping"-->
+<!--        android:icon="@mipmap/icon_yysp"-->
+<!--        android:title="医院视频" />-->
+<!--    <item-->
+<!--        android:id="@+id/navigation_yaopin"-->
+<!--        android:icon="@mipmap/icon_ypxx"-->
+<!--        android:title="药品信息" />-->
+<!--    <item-->
+<!--        android:id="@+id/navigation_liucheng"-->
+<!--        android:icon="@mipmap/icon_lccx"-->
+<!--        android:title="流程查询" />-->
+<!--    <item-->
+<!--        android:id="@+id/navigation_yewu"-->
+<!--        android:icon="@mipmap/icon_ywzy"-->
+<!--        android:title="业务指导" />-->
+<!--    <item-->
+<!--        android:id="@+id/navigation_guanwang"-->
+<!--        android:icon="@mipmap/icon_yygw"-->
+<!--        android:title="医院官网" />-->
+
+</menu>

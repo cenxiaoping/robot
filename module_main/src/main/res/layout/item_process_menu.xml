@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/item_cotentview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_item_title"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="6dp"
+        android:padding="6dp"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:background="@drawable/selector_business_menu"
+        android:text="住院流程"/>
+
+</LinearLayout>

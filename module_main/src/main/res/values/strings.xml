@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">module_main</string>
+    <string name="title_we_chat">微信</string>
+    <string name="title_find">发现</string>
+    <string name="title_my">我</string>
+    <string name="login_">登录</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="robot/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_common/lib_common.iml" group="robot/lib_common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_net/lib_net.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_net/lib_net.iml" group="robot/lib_net" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib_utils/lib_utils.iml" filepath="$PROJECT_DIR$/.idea/modules/lib_utils/lib_utils.iml" group="robot/lib_utils" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_main/module_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module_main/module_main.iml" group="robot/module_main" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/robot.iml" filepath="$PROJECT_DIR$/.idea/modules/robot.iml" group="robot" />
+    </modules>
+  </component>
+</project>

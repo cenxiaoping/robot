@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.kelin.scrollablepanel:library:1.2.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b3b342b44b20eada42155705dd8ff12/jetified-library-1.2.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b3b342b44b20eada42155705dd8ff12/jetified-library-1.2.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kelin.scrollablepanel/library/1.2.0/4642e01b354b2cd6407f7c4c31b710f625bca6aa/library-1.2.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kelin.scrollablepanel/library/1.2.0/a4f229f1b0232540bd1522d7d65c292c513b4c29/library-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

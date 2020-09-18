@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/root_bg">
+
+
+        <ImageView
+            android:id="@+id/choice_role_female"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="40.5dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/site_chices_role_nuxing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/choice_role_male"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="43.5dp"
+            android:src="@drawable/site_chices_role_nanxing"
+            app:layout_constraintBottom_toTopOf="@id/choice_role_female"
+            app:layout_constraintStart_toStartOf="@id/choice_role_female" />
+
+        <ImageView
+            android:id="@+id/choice_role_child"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="43.5dp"
+            android:src="@drawable/site_chices_role_ertong"
+            app:layout_constraintStart_toStartOf="@id/choice_role_female"
+            app:layout_constraintTop_toBottomOf="@id/choice_role_female" />
+
+        <View
+            android:id="@+id/temp_v_b_male"
+            android:layout_width="240dp"
+            android:layout_height="340dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="20dp"
+            android:background="@mipmap/sex_choose_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="26.5dp"
+            android:layout_marginTop="13.5dp"
+            android:src="@mipmap/sex_choose_title_bg"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_male" />
+
+
+        <TextView
+            android:id="@+id/choice_role_tv"
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#ff0091da"
+            android:shadowRadius="3.0"
+            android:text="男性"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_male" />
+
+
+        <ImageView
+            android:id="@+id/choice_role_img_male"
+            android:layout_width="85.5dp"
+            android:layout_height="240dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_man"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_male"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/choice_role_img_female"
+            android:layout_width="112dp"
+            android:layout_height="256dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_women"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_male"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male" />
+
+
+        <ImageView
+            android:id="@+id/choice_role_img_child"
+            android:layout_width="87dp"
+            android:layout_height="214.5dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_child"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_male"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male" />
+
+
+        <TextView
+            android:id="@+id/symptom_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7.5dp"
+            android:text="选择可能出现的症状部位："
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@id/temp_v_b_male"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:textColor="@color/design_default_color_primary" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="@id/symptom_title"
+            android:id="@+id/cons_back"
+            android:layout_width="74dp"
+            app:layout_constraintLeft_toLeftOf="@id/choice_role_male"
+            android:layout_marginTop="12dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="17dp"
+            android:background="@drawable/shape_tv_bg_depart">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="14dp"
+                android:layout_height="11dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="74dp"
+                android:layout_height="29dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/symptom_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="21dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_male"
+            app:spanCount="5"
+            tools:itemCount="42"
+            tools:listitem="@layout/item_symptom_choices" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@mipmap/root_bg">
+
+        <LinearLayout
+            android:layout_width="369dp"
+            android:layout_height="384dp"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_bg_login"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_login_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:text="欢迎登录"
+                android:textColor="#308CFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_login"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:src="@mipmap/xiaobo_icon" />
+
+            <EditText
+                android:id="@+id/et_work_code"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/shape_et_login"
+                android:drawableLeft="@mipmap/login_img_gonghao"
+                android:drawablePadding="10dp"
+                android:hint="请输入工号"
+                android:inputType="number"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/shape_et_login"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="设备编码："
+                    android:lines="1"
+                    android:paddingLeft="14dp"
+                    android:textColor="#B8BED1"
+                    android:textColorHint="@color/color_B8BED1"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:textColor="#32394E"
+                    android:textColorHint="@color/color_B8BED1"
+                    android:textSize="12dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/shape_et_login"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="版本号："
+                    android:lines="1"
+                    android:paddingLeft="14dp"
+                    android:textColor="#B8BED1"
+                    android:textColorHint="@color/color_B8BED1"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_version_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    tools:text="V1.0.0"
+                    android:lines="1"
+                    android:paddingLeft="14dp"
+                    android:textColor="#32394E"
+                    android:textColorHint="@color/color_B8BED1"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/select_btn_confim"
+                android:text="登录"
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

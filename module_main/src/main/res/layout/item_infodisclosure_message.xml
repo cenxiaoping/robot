@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="省级专家到罗平县人民医院对胸痛中心现场验收核查" />
+
+    <TextView
+        android:id="@+id/item_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:minHeight="25dp"
+        android:textColor="#666666"
+        android:textSize="9sp"
+        tools:text="2020年8月15日，省级胸痛中心验收组专家郭瑞威教授一行6人对罗平县人民医院胸痛中心进行现场评审验收。省级胸痛中心验收组专家郭瑞威教授一行6人对罗平县人民医院胸痛中心进行现场评审验收省级胸痛中心验收组专家郭瑞威教授一行6人对罗平县人民医院胸痛中心进行现场评审验收" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="6dp"
+        android:background="#EAEAEA" />
+
+</LinearLayout>

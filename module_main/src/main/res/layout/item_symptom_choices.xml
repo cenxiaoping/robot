@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|left"
+    android:orientation="horizontal"
+    android:paddingTop="7dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="7dp">
+
+    <TextView
+        android:id="@+id/symptom_name"
+        android:layout_width="96dp"
+        android:layout_height="30dp"
+        android:background="@drawable/item_site_choices_but_sel"
+        android:gravity="center"
+        android:text="全身"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="8.16dp"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/item_site_choices_but_shouzhi_sel"
+        tools:src="@mipmap/site_selected" />
+
+</LinearLayout>

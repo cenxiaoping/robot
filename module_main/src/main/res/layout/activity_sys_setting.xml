@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bojun.main.mvvm.viewmodel.LoginViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/root_bg">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="40dp">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="38dp"
+                android:src="@mipmap/yiyuan_logo" />
+
+            <TextClock
+                android:id="@+id/dc_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:format12Hour="yyyy年MM月dd日 hh:mm"
+                android:format24Hour="yyyy年MM月dd日 HH:mm"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="369dp"
+            android:layout_height="384dp"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_bg_login"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_login_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:text="系统配置"
+                android:textColor="#308CFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_equipment_code"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/shape_et_login"
+                android:hint="设备编码"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:text="@={viewModel.equipmentCode}"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/et_ip"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/shape_et_login"
+                android:hint="IP地址"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:text="@={viewModel.ip}"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/et_port"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/shape_et_login"
+                android:hint="端口"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:text="@={viewModel.port}"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp" />
+            <LinearLayout
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp">
+                <Button
+                    android:id="@+id/btn_confim"
+                    android:layout_width="100dp"
+                    android:layout_height="33dp"
+                    android:background="@drawable/select_btn_confim"
+                    android:text="确认"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp" />
+                <Button
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/btn_back"
+                    android:layout_width="100dp"
+                    android:layout_height="33dp"
+                    android:background="@drawable/select_btn_back"
+                    android:text="返回"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

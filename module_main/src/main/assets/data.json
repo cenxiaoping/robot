@@ -1,0 +1,41 @@
+{
+  "transType": "DoctorAdvicess",
+  "code": "success",
+  "msg": "成功",
+  "showMsg": "null",
+  "result":
+  {
+    "list": [
+      {
+        "TZYS": "廖佰华",
+        "YZZH": "100",
+        "ZYH": "717449"
+      }, {
+        "TZYS": "廖佰华",
+        "YZZH": "120",
+        "ZYH": "717449"
+      }, {
+        "TZYS": "廖佰华",
+        "YZZH": "120",
+        "ZYH": "717449"
+      }, {
+        "TZYS": "廖佰华",
+        "YZZH": "130",
+        "ZYH": "717449"
+      }, {
+        "TZYS": "廖佰华",
+        "YZZH": "130",
+        "ZYH": "717449"
+      }, {
+        "TZYS": "廖佰华",
+        "YZZH": "130",
+        "ZYH": "717449"
+      }
+    ],
+    "patientData": {
+      "feeNo": "717449",
+      "bedNo": "WZ17"
+    }
+  }
+
+}

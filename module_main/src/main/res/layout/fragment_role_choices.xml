@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7.5dp"
+            android:text="请选择："
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:textColor="@color/design_default_color_primary" />
+
+
+        <View
+            android:id="@+id/temp_v_b_male"
+            android:layout_width="240dp"
+            android:layout_height="340dp"
+            android:layout_marginStart="40.5dp"
+            android:background="@mipmap/sex_choose_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="26.5dp"
+            android:layout_marginTop="13.5dp"
+            android:src="@mipmap/sex_choose_title_bg"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_male" />
+
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#ff0091da"
+            android:shadowRadius="3.0"
+            android:text="男性"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_male" />
+
+
+        <ImageView
+            android:layout_width="85.5dp"
+            android:layout_height="240dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_man"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_male"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_male"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_male" />
+
+
+        <View
+            android:id="@+id/temp_v_b_female"
+            android:layout_width="240dp"
+            android:layout_height="340dp"
+            android:background="@mipmap/sex_choose_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="26.5dp"
+            android:layout_marginTop="13.5dp"
+            android:src="@mipmap/sex_choose_title_bg"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_female"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_female"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_female" />
+
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#ff0091da"
+            android:shadowRadius="3.0"
+            android:text="女性"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_female"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_female"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_female" />
+
+
+        <ImageView
+            android:layout_width="112dp"
+            android:layout_height="256dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_women"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_female"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_female"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_female" />
+
+        <View
+            android:id="@+id/temp_v_b_child"
+            android:layout_width="240dp"
+            android:layout_height="340dp"
+            android:layout_marginEnd="40.5dp"
+            android:background="@mipmap/sex_choose_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="26.5dp"
+            android:layout_marginTop="13.5dp"
+            android:src="@mipmap/sex_choose_title_bg"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_child"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_child"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_child" />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#ff0091da"
+            android:shadowRadius="3.0"
+            android:text="儿童"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_child"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_child"
+            app:layout_constraintTop_toTopOf="@id/temp_v_b_child" />
+
+
+        <ImageView
+            android:layout_width="87dp"
+            android:layout_height="214.5dp"
+            android:layout_marginBottom="33dp"
+            android:src="@mipmap/icon_child"
+            app:layout_constraintBottom_toBottomOf="@id/temp_v_b_child"
+            app:layout_constraintEnd_toEndOf="@id/temp_v_b_child"
+            app:layout_constraintStart_toStartOf="@id/temp_v_b_child" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

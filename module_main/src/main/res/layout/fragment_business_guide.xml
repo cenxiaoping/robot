@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="6dp">
+
+        <FrameLayout
+            android:layout_width="240dp"
+            android:layout_height="377dp"
+            android:layout_marginLeft="40dp">
+
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="364dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_bg_video_left">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="13dp"
+                    android:divider="@null"
+                    android:listSelector="@color/transparent"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="142dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/video_toubu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="业务指引"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="626dp"
+            android:layout_height="377dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/video_bottom"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_business_guide_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="37dp"
+                        android:layout_height="27dp"
+                        android:layout_marginLeft="23dp"
+                        android:layout_marginTop="23dp"
+                        android:src="@mipmap/xiaobo_icon" />
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="23dp"
+                        android:text="请选择您要查看的流程！"
+                        android:textColor="@color/color_000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:lineSpacingExtra="10dp"
+                        android:textColor="@color/color_000000"
+                        android:textSize="12sp" />
+
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

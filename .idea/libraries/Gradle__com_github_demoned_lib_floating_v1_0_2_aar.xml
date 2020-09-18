@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.demoned:lib_floating:v1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15e7d9363408650ddc0343ef3dff12f0/lib_floating-v1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15e7d9363408650ddc0343ef3dff12f0/lib_floating-v1.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.demoned/lib_floating/v1.0.2/6a36d8a803dfedfcf9a346ca2fadf0f16d4569da/lib_floating-v1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="40dp">
+
+        <FrameLayout
+            android:layout_width="240dp"
+            android:layout_height="377dp">
+
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="364dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_bg_video_left">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:listSelector="@color/transparent"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_video" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="142dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/video_toubu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="视频列表"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+                android:layout_width="626.5dp"
+                android:layout_height="376.5dp"
+                android:layout_marginLeft="15dp"
+                android:background="@mipmap/video_bottom"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="24dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="15dp">
+
+                    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+                        android:id="@+id/video_player"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true" />
+
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/mvideo_setting"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="23dp"
+                android:background="@drawable/setting_bg"
+                android:padding="5dp"
+                android:src="@mipmap/icon_setting" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

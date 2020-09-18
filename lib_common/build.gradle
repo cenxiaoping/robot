@@ -1,0 +1,86 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['jnilibs']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.support["constraint-layout"]
+    api rootProject.ext.support["design"]
+    api project(':lib_net')
+    api rootProject.ext.dependencies["arouter-api"]
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.eventbus
+
+    api(rootProject.ext.dependencies.rxbinding) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies.rxpermissions) {
+        exclude group: 'com.android.support'
+    }
+
+    api(rootProject.ext.dependencies.glide) {
+        exclude group: 'com.android.support'
+    }
+    implementation files('libs\\AIUI.jar')
+    implementation files('libs\\facedetection.jar')
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    api rootProject.ext.dependencies.dagger
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    api rootProject.ext.dependencies.stetho
+    api rootProject.ext.dependencies.MultiImageSelector
+    api rootProject.ext.dependencies.ServiceKeepLive
+    api rootProject.ext.dependencies.ApkUpdate
+    api rootProject.ext.dependencies["floating_view"]
+    api rootProject.ext.dependencies["kotlin-stdlib"]
+    api rootProject.ext.dependencies["lib_chart"]
+    api rootProject.ext.dependencies["lib_floating"]
+    api rootProject.ext.dependencies["lib_process"]
+    api rootProject.ext.dependencies["lib_statusbar"]
+    api rootProject.ext.dependencies["calendarview"]
+    api rootProject.ext.dependencies["threetenabp"]
+    api rootProject.ext.dependencies["gSYVideoPlayer"]
+    api 'me.jessyan:autosize:1.1.2'
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+    api 'com.github.demoned:lib_photoSelect:v1.0.0'
+    api 'com.kelin.scrollablepanel:library:1.2.0'
+    api 'com.github.Demons15:ServiceKeepLive:v1.2'
+    api 'org.java-websocket:Java-WebSocket:1.3.9'
+    api 'com.orhanobut:logger:1.15'
+}

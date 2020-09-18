@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="41dp"
+        android:paddingRight="40dp"
+        tools:background="@mipmap/root_bg">
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_xiaobo"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/xiaobo_icon" />
+
+            <TextView
+                android:id="@+id/tv_title_xiaobo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您好，我是导诊机器人小博，您可以用普通话向我咨询！"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_1"
+            android:layout_width="240dp"
+            android:layout_height="162dp"
+            android:layout_marginTop="8dp"
+            android:background="@mipmap/icon_bg_main"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_title">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_yj_title"
+                android:layout_width="150dp"
+                android:layout_height="27dp"
+                android:background="@mipmap/sex_choose_title_bg"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="预检分诊"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_yjfz"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="20dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_yj_title"
+                app:spanCount="2"
+                tools:listitem="@layout/item_xiaobo_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_2"
+            android:layout_width="240dp"
+            android:layout_height="162dp"
+            android:layout_marginTop="15dp"
+            android:background="@mipmap/icon_bg_main"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cons_1">
+
+            <TextView
+                android:id="@+id/tv_dh_title"
+                android:layout_width="150dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/sex_choose_title_bg"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="导航"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_dh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="20dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dh_title"
+                app:spanCount="2"
+                tools:listitem="@layout/item_xiaobo_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="623dp"
+            android:layout_height="338dp"
+            android:layout_marginLeft="17dp"
+            android:background="@mipmap/video_bottom"
+            app:layout_constraintLeft_toRightOf="@id/cons_1"
+            app:layout_constraintTop_toTopOf="@id/cons_1">
+
+            <TextView
+                android:id="@+id/tv_title_1"
+                android:layout_width="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="27dp"
+                android:background="@mipmap/sex_choose_title_bg"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="小博说："
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginBottom="46dp"
+                android:background="@drawable/shape_list_bg_xiaobo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

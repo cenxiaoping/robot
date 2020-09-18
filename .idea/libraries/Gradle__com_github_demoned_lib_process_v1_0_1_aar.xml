@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.demoned:lib_process:v1.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8870b347ecebcdc9faa28d9e37c33283/lib_process-v1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8870b347ecebcdc9faa28d9e37c33283/lib_process-v1.0.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.demoned/lib_process/v1.0.1/142a0b59485bd3417c5b12215d190fabb83fd48d/lib_process-v1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

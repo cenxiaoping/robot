@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_group"
+    app:startDestination="@id/fragment_xiaobo_help">
+
+
+    <fragment
+        android:id="@+id/fragment_xiaobo_help"
+        android:name="com.bojun.main.fragment.XiaoboHelpYouFragment"
+        tools:layout="@layout/fragment_xiaobo_help" />
+
+    <fragment
+        android:id="@+id/fragment_role_choices"
+        android:name="com.bojun.main.fragment.RoleChoicesFragment"
+        tools:layout="@layout/fragment_role_choices">
+
+        <action
+            android:id="@+id/action_role_choices_to_fragment_site_choices"
+            app:destination="@+id/fragment_site_choices" />
+        <action
+            android:id="@+id/action_role_choices_to_fragment_xiaobo_help"
+            app:destination="@+id/fragment_xiaobo_help" />
+        <action
+            android:id="@+id/action_role_choices_to_to_fragment_hospital_introduce"
+            app:destination="@+id/fragment_hospital_introduce" />
+        <action
+            android:id="@+id/action_role_choices_to_to_fragment_info_disclosure"
+            app:destination="@+id/fragment_info_disclosure" />
+        <action
+            android:id="@+id/action_role_choices_to_to_fragment_hospital_navigation"
+            app:destination="@+id/fragment_hospital_navigation" />
+        <action
+            android:id="@+id/action_role_choices_to_to_fragment_hospital_video"
+            app:destination="@+id/fragment_hospital_video" />
+        <action
+            android:id="@+id/action_role_choices_to_to_fragment_business_guide"
+            app:destination="@+id/fragment_business_guide" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_hospital_introduce"
+        android:name="com.bojun.main.fragment.HospitalIntroduceFragment"
+        tools:layout="@layout/fragment_hospital_introduce" />
+    <fragment
+        android:id="@+id/fragment_info_disclosure"
+        android:name="com.bojun.main.fragment.InforDisclosureFragment"
+        tools:layout="@layout/fragment_hospital_introduce" />
+
+    <fragment
+        android:id="@+id/fragment_hospital_navigation"
+        android:name="com.bojun.main.fragment.HospitalNavigationFragment"
+        tools:layout="@layout/fragment_hospital_introduce" />
+    <fragment
+        android:id="@+id/fragment_hospital_video"
+        android:name="com.bojun.main.fragment.HospitalVideoFragment"
+        tools:layout="@layout/fragment_hospital_introduce" />
+    <fragment
+        android:id="@+id/fragment_business_guide"
+        android:name="com.bojun.main.fragment.BusinessGuideFragment"
+        tools:layout="@layout/fragment_hospital_introduce" />
+
+
+    <fragment
+        android:id="@+id/fragment_site_choices"
+        android:name="com.bojun.main.fragment.SiteChoicesFragment"
+        tools:layout="@layout/fragment_site_choices" />
+
+
+</navigation>

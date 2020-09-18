@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.demoned:lib_chart:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b5c38111975502bbdaa95640b5994e0f/jetified-lib_chart-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b5c38111975502bbdaa95640b5994e0f/jetified-lib_chart-1.0.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.demoned/lib_chart/1.0.0/30b31d9ca8a490c6a8acda29224085b7e48a19dd/lib_chart-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

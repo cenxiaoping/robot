@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bojun.main.mvvm.viewmodel.LoginViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="40dp">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="160dp"
+                android:layout_height="38dp"
+                android:src="@mipmap/yiyuan_logo" />
+
+            <TextClock
+                android:id="@+id/dc_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:format12Hour="yyyy年MM月dd日 hh:mm"
+                android:format24Hour="yyyy年MM月dd日 HH:mm"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="369dp"
+            android:layout_height="384dp"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_bg_login"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_login_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:text="管理员登录"
+                android:textColor="#308CFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_login"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:src="@mipmap/login_img_touxiang_normal" />
+
+            <EditText
+                android:id="@+id/et_work_code"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/shape_et_login"
+                android:drawableLeft="@mipmap/login_img_gonghao"
+                android:drawablePadding="10dp"
+                android:hint="请输入工号"
+                android:inputType="number"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:text="@={viewModel.username}"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/shape_et_login"
+                android:drawableLeft="@mipmap/login_img_mima"
+                android:drawablePadding="10dp"
+                android:hint="请输入管理员密码"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:paddingLeft="14dp"
+                android:text="@={viewModel.password}"
+                android:textColor="@color/color_4A4A4A"
+                android:textColorHint="@color/color_B8BED1"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="212dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/select_btn_confim"
+                android:text="登录"
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:text="温馨提示：若忘记密码，请联系管理员重置"
+                android:textColor="#B8BED1"
+                android:textSize="10dp" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

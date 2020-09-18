@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        tools:background="@mipmap/root_bg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_01"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/shape_bg_depart_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cons_back"
+                android:layout_width="74dp"
+                android:layout_height="29dp"
+                android:layout_marginBottom="11dp"
+                android:background="@drawable/shape_tv_bg_depart"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="14dp"
+                    android:layout_height="11dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_back"
+                    android:layout_width="74dp"
+                    android:layout_height="29dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="返回"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_depart"
+                android:layout_width="220dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="15dp"
+                android:paddingTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/cons_back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="2"
+                tools:listitem="@layout/item_depart_list" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_depart_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="44.5dp"
+            android:background="@drawable/layout_round_style"
+            android:minHeight="77dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="35dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@id/cons_01"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cons_01"
+            tools:text="您好！您可能为功能性消化不良症，建议您到医院消化内科就诊！" />
+
+
+        <ImageView
+            android:layout_width="114.5dp"
+            android:layout_height="25.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="44.5dp"
+            android:src="@mipmap/symptom_message_title_bg0"
+            app:layout_constraintLeft_toLeftOf="@id/tv_depart_desc"
+            app:layout_constraintRight_toRightOf="@id/tv_depart_desc"
+            app:layout_constraintTop_toTopOf="@id/cons_01" />
+
+        <TextView
+            android:id="@+id/tv_depart_title"
+            android:layout_width="114.5dp"
+            android:layout_height="25.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="44.5dp"
+            android:gravity="center"
+            android:src="@mipmap/symptom_message_title_bg0"
+            android:text="科室介绍"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_depart_desc"
+            app:layout_constraintRight_toRightOf="@id/tv_depart_desc"
+            app:layout_constraintTop_toTopOf="@id/cons_01" />
+
+        <ImageView
+            android:id="@+id/iv_go_here"
+            android:layout_width="89dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:src="@mipmap/go_here"
+            app:layout_constraintRight_toRightOf="@id/tv_depart_desc"
+            app:layout_constraintTop_toTopOf="@id/tv_depart_desc" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_doctor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="44.5dp"
+            android:background="@drawable/layout_round_style"
+            android:minHeight="77dp"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="35dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/cons_01"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/cons_01"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_depart_desc"
+            app:layout_constraintVertical_bias="1.0"
+            tools:listitem="@layout/item_doctor_depart"
+            tools:text="您好！您可能为功能性消化不良症，建议您到医院消化内科就诊！" />
+
+        <ImageView
+            android:id="@+id/iv_doctor"
+            android:layout_width="114.5dp"
+            android:layout_height="25.5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="44.5dp"
+            android:src="@mipmap/symptom_message_title_bg0"
+            app:layout_constraintLeft_toLeftOf="@id/list_doctor"
+            app:layout_constraintRight_toRightOf="@id/list_doctor"
+            app:layout_constraintTop_toBottomOf="@id/tv_depart_desc" />
+
+        <TextView
+            android:id="@+id/tv_doctor_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:src="@mipmap/symptom_message_title_bg0"
+            android:text="医生介绍"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="@id/iv_doctor"
+            app:layout_constraintRight_toRightOf="@id/iv_doctor"
+            app:layout_constraintTop_toTopOf="@id/iv_doctor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
